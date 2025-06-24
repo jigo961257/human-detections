@@ -1,0 +1,9 @@
+# Human Detection System Requirements
+opencv-python>=4.5.5.64
+numpy>=1.21.0
+pyserial>=3.5
+protobuf>=3.20.0  # Required for some OpenCV DNN models
+
+# For development/testing (optional)
+matplotlib>=3.5.0  # For visualization/debugging
+ipython>=8.0.0     # For interactive debugging
