@@ -12,7 +12,7 @@ CONFIDENCE_THRESHOLD = 0.5
 HUMAN_CLASS_ID = 15
 
 # Serial port configuration
-SERIAL_PORT = '/dev/cu.usbserial-0001'  # Change to your Arduino port (COM3, COM4, /dev/ttyUSB0, etc.)
+SERIAL_PORT = '/dev/cu.usbserial-1120'  # Change to your Arduino port (COM3, COM4, /dev/ttyUSB0, etc.)
 BAUD_RATE = 9600
 
 # Detection area configuration (percentage of frame width/height)
@@ -148,5 +148,6 @@ finally:
     cap.release()
     cv2.destroyAllWindows()
     if ser is not None:
+        send_serial_data(0)
         ser.close()
     log_message("System shutdown")
