@@ -5,14 +5,14 @@ from datetime import datetime
 import serial
 
 # Configuration
-WEBCAM_INDEX = 0
+WEBCAM_INDEX = 1
 PROTOTXT = "MobileNetSSD_deploy.prototxt"
 MODEL = "MobileNetSSD_deploy.caffemodel"
 CONFIDENCE_THRESHOLD = 0.5
 HUMAN_CLASS_ID = 15
 
 # Serial port configuration
-SERIAL_PORT = '/dev/cu.usbserial-1120'  # Change to your Arduino port (COM3, COM4, /dev/ttyUSB0, etc.)
+SERIAL_PORT = '/dev/cu.usbserial-120'  # Change to your Arduino port (COM3, COM4, /dev/ttyUSB0, etc.)
 BAUD_RATE = 9600
 
 # Detection area configuration (percentage of frame width/height)
