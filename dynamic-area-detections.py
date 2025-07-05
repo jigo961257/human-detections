@@ -3,6 +3,7 @@ import time
 import numpy as np
 from datetime import datetime
 import serial
+import RPi.GPIO as GPIO
 
 # Configuration
 WEBCAM_INDEX = 1
@@ -10,6 +11,8 @@ PROTOTXT = "MobileNetSSD_deploy.prototxt"
 MODEL = "MobileNetSSD_deploy.caffemodel"
 CONFIDENCE_THRESHOLD = 0.5
 HUMAN_CLASS_ID = 15
+
+GPIO_LED = 4
 
 # Serial port configuration
 SERIAL_PORT = '/dev/cu.usbserial-120'  # Change to your Arduino port
@@ -49,6 +52,11 @@ try:
 except serial.SerialException as e:
     print(f"Error opening serial port: {e}")
     ser = None
+
+def set_gpio(pin_number, value):
+    GPIO.setmode(GPIO.BCM)      # Use BCM numbering scheme
+    GPIO.setup(pin_number, GPIO.OUT) # Set pin as an output
+    GPIO.output(pin_number, value) # Set the pin's state
 
 def log_message(message):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -214,6 +222,7 @@ def detect_humans(frame):
     
     # Send serial data based on detection (1 if more than 1 human detected)
     send_serial_data(human_count > 1)
+    set_gpio(GPIO_LED, human_count > 1)  # Set GPIO LED state based on detection
     
     return frame
 
@@ -284,5 +293,6 @@ finally:
     cv2.destroyAllWindows()
     if ser is not None:
         send_serial_data(0) # Ensure serial state is reset on exit
+        set_gpio(GPIO_LED, 0) # Turn off GPIO LED
         ser.close()
     log_message("System shutdown")
