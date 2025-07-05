@@ -12,7 +12,7 @@ MODEL = "MobileNetSSD_deploy.caffemodel"
 CONFIDENCE_THRESHOLD = 0.5
 HUMAN_CLASS_ID = 15
 
-GPIO_LED = 4
+GPIO_LED = 23
 
 # Serial port configuration
 SERIAL_PORT = '/dev/cu.usbserial-120'  # Change to your Arduino port
